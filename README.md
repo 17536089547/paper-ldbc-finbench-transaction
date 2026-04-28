@@ -7,8 +7,8 @@
 本项目包含三个核心模块：
 
 * **`graphybench_driver/`**: 压测驱动核心框架。负责读取参数文件、控制并发线程、发送查询请求并统计吞吐量（Throughput）和延迟（Latency）。
-* **`graphybench_transaction_impls/`**: 数据库的具体实现层。包含对接不同图数据库（如 `galaxybase-cypher` 等）的代码实现和启动脚本。
-* **`paper-ldbc-finbench-transaction/`**: 参考文档与规范。包含 LDBC FinBench 的官方规范文档、查询定义和相关论文。
+* **`graphybench_transaction_impls/`**: 数据库的具体实现层。包含对接galaxybase图数据库的代码实现和启动脚本。
+* **`paper-ldbc-finbench-transaction/`**: 包含配置文件和启动脚本。
 
 ## 🛠️ 环境依赖
 
