@@ -1,0 +1,1 @@
+CALL plugin.tw16($mediumId, $accountId, $time)

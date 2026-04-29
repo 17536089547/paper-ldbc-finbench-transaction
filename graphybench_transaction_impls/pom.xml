@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.graphybench</groupId>
+    <artifactId>impls</artifactId>
+    <name>Reference Implementation</name>
+    <version>0.2.0-alpha</version>
+    <description>Reference implementations for GraphyBench transaction workload</description>
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <driver.version>0.2.0-alpha</driver.version>
+        <junit.version>4.11</junit.version>
+        <log4j.version>2.19.0</log4j.version>
+    </properties>
+
+    <modules>
+        <module>common</module>
+        <module>dummy</module>
+        <module>tugraph</module>
+        <module>galaxybase-cypher</module>
+<!--        <module>neo4j</module>-->
+    </modules>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.graphybench.driver</groupId>
+            <artifactId>driver</artifactId>
+            <version>${driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <!--for submodules-->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>copy-dependencies</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                                <overWriteReleases>false</overWriteReleases>
+                                <overWriteSnapshots>false</overWriteSnapshots>
+                                <overWriteIfNewer>true</overWriteIfNewer>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>graphybench-mvn</id>
+            <url>https://ldbcouncil.org/graphybench_mvn/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>all</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>common</module>
+                <module>dummy</module>
+<!--                <module>tugraph</module>-->
+            </modules>
+        </profile>
+    </profiles>
+</project>

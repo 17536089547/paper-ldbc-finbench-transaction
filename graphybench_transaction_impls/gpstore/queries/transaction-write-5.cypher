@@ -1,0 +1,1 @@
+CALL plugin.tw5($companyId, $accountId, $time, $accountBlocked, $accountType)

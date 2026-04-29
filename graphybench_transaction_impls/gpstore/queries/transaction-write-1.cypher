@@ -1,0 +1,1 @@
+CALL plugin.tw1($personId, $personName, $isBlocked)

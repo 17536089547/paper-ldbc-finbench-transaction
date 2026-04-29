@@ -1,0 +1,1 @@
+CALL plugin.tw8($personId, $companyId, $time, $ratio)

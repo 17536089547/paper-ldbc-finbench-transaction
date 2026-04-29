@@ -1,0 +1,23 @@
+find().nodes({@Account && _id==$id}) as start
+exta(complex_read).params({
+	srcs:start,
+	edgeDirection:"out",
+	depth:3,
+	limit:10000000,
+	edge_schema:"Transfer",
+	edge_timestamp:"timestamp",
+	edge_amount:"amount",
+    amount:-1,
+    pre:1,
+	range_begin:$startTime,
+	range_end:$endTime,
+	noCircle:0,
+	top_n:$truncationLimit,
+	order:$truncationOrder,
+	return_type:1
+}).stream() as rest
+with rest.dest as dd,rest.length as length
+n({dd} as other).le({@SignIn}).n({@Medium.isBlocked=='true'} as medium) as p
+with distinct other._id as otherId,length as accountDistance,medium._id as mediumId,medium.type as mediumType
+return table(otherId,accountDistance,mediumId,mediumType)
+order by accountDistance,otherId,mediumId asc

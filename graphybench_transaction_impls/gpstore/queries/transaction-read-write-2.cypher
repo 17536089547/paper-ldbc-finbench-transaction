@@ -1,0 +1,1 @@
+CALL plugin.trw2($srcId, $dstId, $time, $amount, $amountThreshold, $startTime, $endTime, $ratioThreshold, $truncationLimit, $truncationOrder)

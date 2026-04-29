@@ -1,0 +1,1 @@
+insert().into(@Person).nodes({_id:$personId,name:$personName,isBlocked:$isBlocked})

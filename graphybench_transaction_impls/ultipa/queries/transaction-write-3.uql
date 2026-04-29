@@ -1,0 +1,1 @@
+insert().into(@Medium).nodes({_id:$mediumId,isBlocked:$isBlocked})

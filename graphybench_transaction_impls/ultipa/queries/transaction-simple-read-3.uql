@@ -1,0 +1,4 @@
+n({@Account && isBlocked=='true'}).re({@Transfer && timestamp <> [$startTime,$endTime] && amount>$threshold}).n({@Account && _id==$id}) as path1
+return table(count(path1));
+n({@Account}).re({@Transfer}).n({@Account && _id==$id}) as path2
+return table(count(path2))

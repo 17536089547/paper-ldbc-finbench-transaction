@@ -1,0 +1,1 @@
+insert().into(@Invest).edges({_from:$personId,_to:$companyId,timestamp:$time,ratio:$ratio})

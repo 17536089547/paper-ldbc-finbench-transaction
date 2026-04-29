@@ -1,0 +1,17 @@
+find().nodes({_id==$id1}) as src
+find().nodes({_id==$id2}) as dest
+with src as srcId,dest as destId
+exta(abpath).params({
+	src:srcId,
+    dest:destId,
+	edgeDirection:"out",
+	depth:20,
+	limit:10000,
+	edge_schema:"Transfer",
+	edge_timestamp:"timestamp",
+	range_begin:$startTime,
+	range_end:$endTime,
+	top_n:1000000000,
+    order:'desc'
+}).stream() as ret
+return distinct table(size(ret)-1)

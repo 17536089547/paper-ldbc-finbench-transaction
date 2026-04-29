@@ -1,0 +1,17 @@
+n({@Account && _id==$id} as mid).le({@Deposit && amount > $threshold && timestamp <> [$startTime,$endTime]} as edge1).n({@Loan})
+return table(sum(edge1.amount));
+
+n({@Account && _id==$id} as mid).re({@Repay && amount > $threshold && timestamp <> [$startTime,$endTime]} as edge2).n({@Loan})
+return table(sum(edge2.amount));
+
+
+n({@Account && _id==$id}).le({@Transfer && amount > $threshold && timestamp <> [$startTime,$endTime]} as edge3).n({@Account})
+return table(sum(edge3.amount))
+order by edge3.timestamp $truncationOrder
+limit $truncationLimit;
+
+
+n({@Account && _id==$id}).re({@Transfer && amount > $threshold && timestamp <> [$startTime,$endTime]} as edge4).n({@Account})
+return table(sum(edge4.amount))
+order by edge4.timestamp $truncationOrder
+limit $truncationLimit
